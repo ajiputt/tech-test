@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    hikari:
+      connection-timeout: 10000
+      minimum-idle: 1
+      maximum-pool-size: 5
+      idle-timeout: 10000
+      max-lifetime: 30000
+      auto-commit: true
+management:
+  endpoint:
+    health:
+      show-details: "always"
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include:
+          - livenessStateProbeIndicator
+          - db
+        readiness:
+          include:
+          - readinessStateProbeIndicator
+          - db
+  endpoints:
+    web:
+      exposure:
+        include: "*"
